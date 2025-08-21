@@ -1,8 +1,6 @@
-﻿using System.Runtime.InteropServices;
+﻿namespace SensorLib;
 
-namespace SensorLib;
-
-public class Sensor
+public class Sensor : ISensor
 {
     private double _minTemp;
     private double _maxTemp;
@@ -38,5 +36,11 @@ public class Sensor
     public Sensor(TempRange range, int stepsPerCycle = 100) : this(range.Min, range.Max, stepsPerCycle)
     {
         _range = range;
+    }
+
+
+    public double Fluctuate(double min, double max, Func<double, double, double> fluctuation)
+    {
+        throw new NotImplementedException();
     }
 }
