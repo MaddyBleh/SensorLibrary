@@ -9,5 +9,5 @@ public interface ISensor
     /// <param name="max">The highest temperature allowed (can be negative, must be higher than minTemp)</param>
     /// <param name="fluctuation">Function to compute next tempurature</param>
     /// <returns>New sensor value</returns>
-    public double Fluctuate(double min, double max, Func<double, double, double> fluctuation);
+    public double Fluctuate(double min, double max, Func<double, double, double, double> fluctuation);
 }

@@ -39,8 +39,9 @@ public class Sensor : ISensor
     }
 
 
-    public double Fluctuate(double min, double max, Func<double, double, double> fluctuation)
+    public double Fluctuate(double min, double max, Func<double, double, double, double> fluctuation)
     {
-        throw new NotImplementedException();
+        currentTemp = fluctuation(currentTemp, min, max);
+        return currentTemp;
     }
 }
