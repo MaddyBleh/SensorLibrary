@@ -31,10 +31,12 @@ public class Sensor : ISensor
     }
 
 
-    public double Fluctuate(double min, double max, Func<double, double, double, double> fluctuation)
+    public double Fluctuate(
+        double min, double max, Func<double, double, double, FluctuationConfig, double> fluctuation,
+        FluctuationConfig config)
     {
         // Call the given fluctuation graph
-        currentTemp = fluctuation(currentTemp, min, max);
+        currentTemp = fluctuation(currentTemp, min, max, config);
         return currentTemp;
     }
 }

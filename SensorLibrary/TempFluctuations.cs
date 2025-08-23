@@ -2,14 +2,13 @@
 
 public class TempFluctuations
 {
-    private int _step = 0;
-    private int _maxSteps = 100;
+    private double _step = 0;
     private bool _rising = true;
 
-    public double Parabola(double current, double min, double max)
+    public double Parabola(double current, double min, double max, FluctuationConfig config)
     {
         // Keep step between the range of [-1, 1]
-        double x = _step / (double)_maxSteps * 2 - 1; // x between [-1, 1]
+        double x = _step / (double)config.MaxSteps * 2 - 1; // x between [-1, 1]
 
         // Parabola function, scaled to [min, max]
         double parabola = -(x * x) + 1;
@@ -17,15 +16,17 @@ public class TempFluctuations
 
         // Increment or decrement step depending on direction
         if (_rising)
-            _step++;
+            _step += config.Smoothness;
+        //_step += 0.25; // Smooth
         else
             _step--;
+        //_step -= 0.25; // Smooth
 
         // Flip direction at the ends
-        if (_step >= _maxSteps)
+        if (_step >= config.MaxSteps)
         {
             _rising = false;
-            _step = _maxSteps;
+            _step = config.MaxSteps;
         }
         else if (_step <= 0)
         {
@@ -33,6 +34,6 @@ public class TempFluctuations
             _step = 0;
         }
 
-        return Math.Round(current, 3, MidpointRounding.AwayFromZero);
+        return Math.Round(current, MidpointRounding.AwayFromZero);
     }
 }
